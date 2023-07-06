@@ -17,7 +17,7 @@ const isValid_email = (email) => {
 // GENERATE ACCESS TOKEN ............
 
 const generateAccessToken = (user_id) => {
-	const accessToken = jwt.sign({ _id: user_id }, JWT_ACCESS_TOKEN, { expiresIn: 60 });
+	const accessToken = jwt.sign({ _id: user_id }, JWT_ACCESS_TOKEN, { expiresIn: "1d" });
 	return accessToken;
 };
 
@@ -70,7 +70,6 @@ exports.register = async (req, res) => {
 			password: encrypt_password,
 			gender: req_user.gender,
 		});
-		console.log(newUser.password);
 
 		return res.status(200).json({
 			msg: "Registeration Successful",
@@ -88,10 +87,7 @@ exports.register = async (req, res) => {
 exports.sign_in = async (req, res) => {
 	try {
 		const { email, password } = req.body;
-		console.log(email, password);
 		const get_user = await User.findOne({ email });
-
-		console.log(get_user);
 
 		if (!get_user) {
 			return res.status(400).json({
@@ -119,6 +115,7 @@ exports.sign_in = async (req, res) => {
 	}
 };
 
+// Update User Account
 exports.update = async (req, res) => {
 	try {
 		get_user = await User.findById(req._id);
@@ -130,6 +127,7 @@ exports.update = async (req, res) => {
 	}
 };
 
+// LogOut User Account
 exports.logout = async (req, res) => {
 	try {
 		const { email, password } = req.body;
