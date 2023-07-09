@@ -74,7 +74,6 @@ const userSchema = new mongoose.Schema({
 		},
 	},
 	updatedAt: {
-		// I want to default to a new date
 		type: Date,
 		default: () => {
 			return Date.now();

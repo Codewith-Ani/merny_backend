@@ -1,4 +1,4 @@
-const postModel = require("../models/post.model");
+const postModel = require("../models/Post.model");
 const userModel = require("../models/user.model");
 
 // CREATE POSTS
@@ -27,11 +27,10 @@ exports.create_post = async (req, res) => {
 };
 
 // GET ALL POSTS FROM LOGGED IN USER
-
 exports.get_post = async (req, res) => {
 	try {
 		console.log("in Get Post");
-		const get_all_posts = await postModel.find();
+		const get_all_posts = await postModel.find({ user: req._id });
 
 		if (!get_all_posts) {
 			return res.status(400).json({
@@ -77,5 +76,5 @@ exports.post_Like_Dislike = async (req, res) => {
 
 //UPDATE POST
 
-// GET POST WITH ID  
+// GET POST WITH ID
 // DELETE POST

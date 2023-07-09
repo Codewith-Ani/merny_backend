@@ -139,9 +139,7 @@ exports.logout = async (req, res) => {
 				message: "Email Not Found",
 			});
 		}
-		return res.status(200).json({
-			message: "Logout Successfully",
-		});
+		return res.status(200).json({ message: "Logged Out" });
 	} catch (err) {
 		console.log(err.message);
 	}
